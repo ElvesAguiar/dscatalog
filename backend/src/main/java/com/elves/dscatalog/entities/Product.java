@@ -23,7 +23,7 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    public Product(){
+    public Product() {
 
     }
 

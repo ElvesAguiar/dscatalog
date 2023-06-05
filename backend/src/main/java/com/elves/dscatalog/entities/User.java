@@ -78,13 +78,14 @@ public class User {
         this.password = password;
     }
 
-    public Set<Role> getRoles(){
+    public Set<Role> getRoles() {
         return roles;
     }
 
     public void addRole(Role role) {
         roles.add(role);
     }
+
     public boolean hasRole(String roleName) {
         return roles.stream().anyMatch(role -> role.getAuthority().equals(roleName));
     }
