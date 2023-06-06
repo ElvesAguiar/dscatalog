@@ -40,6 +40,15 @@ public class Product {
         this.imgUrl = imgUrl;
     }
 
+    public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
+        this.date = date;
+    }
+
     public Long getId() {
         return id;
     }
@@ -82,6 +91,14 @@ public class Product {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    public void setDate(Instant date) {
+        this.date = date;
+    }
+
+    public void addCategories(Category category){
+        categories.add(category);
     }
 
     public Instant getDate() {

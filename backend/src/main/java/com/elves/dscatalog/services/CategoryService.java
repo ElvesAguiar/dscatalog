@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryService {
     @Autowired
     CategoryRepository repository;
+    public static final String ENF ="Entity not found";
 
     @Transactional(readOnly = true)
     public Page<CategoryDTO> findAll(Pageable pageable) {
@@ -25,7 +26,7 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
-        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException("Entity not found");
+        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException(ENF);
 
         return new CategoryDTO(repository.findById(id).get());
     }
@@ -39,7 +40,7 @@ public class CategoryService {
 
     @Transactional
     public void delete(Long id) {
-        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException("Entity not found");
+        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException(ENF);
 
         repository.deleteById(id);
 
@@ -48,7 +49,7 @@ public class CategoryService {
     @Transactional
     public CategoryDTO update(Long id, CategoryDTO dto) {
 
-        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException("Entity not found");
+        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException(ENF);
 
         Category cat = repository.getReferenceById(id);
 
