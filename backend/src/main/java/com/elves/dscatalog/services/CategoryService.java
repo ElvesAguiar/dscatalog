@@ -15,9 +15,42 @@ public class CategoryService {
     CategoryRepository repository;
 
     @Transactional(readOnly = true)
-    public List<CategoryDTO> findAll(){
-        List<CategoryDTO> result = repository.findAll().stream().map(x -> new CategoryDTO(x)).toList();
-
-        return result;
+    public List<CategoryDTO> findAll() {
+        return repository.findAll().stream().map(CategoryDTO::new).toList();
     }
+
+    @Transactional(readOnly = true)
+    public CategoryDTO findById(Long id) {
+        if (repository.findById(id).isEmpty()) throw new RuntimeException();
+
+        return new CategoryDTO(repository.findById(id).get());
+    }
+
+    @Transactional
+    public CategoryDTO insert(CategoryDTO dto) {
+        Category entity = new Category();
+        entity.setName(dto.getName());
+        return new CategoryDTO(repository.save(entity));
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        if (repository.findById(id).isEmpty()) throw new RuntimeException();
+
+        repository.deleteById(id);
+
+    }
+
+    @Transactional
+    public CategoryDTO update(Long id, CategoryDTO dto) {
+
+        if (repository.findById(id).isEmpty()) throw new RuntimeException();
+
+        Category cat = repository.getReferenceById(id);
+
+        cat.setName(dto.getName());
+
+        return new CategoryDTO(cat);
+    }
+
 }
