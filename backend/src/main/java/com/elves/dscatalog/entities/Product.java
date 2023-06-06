@@ -2,6 +2,7 @@ package com.elves.dscatalog.entities;
 
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -13,9 +14,13 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+   @Column(columnDefinition = "TEXT")
     private String description;
     private Double price;
     private String imgUrl;
+
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
+    private Instant date;
 
     @ManyToMany
     @JoinTable(name = "tb_product_category",
@@ -77,6 +82,10 @@ public class Product {
 
     public Set<Category> getCategories() {
         return categories;
+    }
+
+    public Instant getDate() {
+        return date;
     }
 
     @Override
