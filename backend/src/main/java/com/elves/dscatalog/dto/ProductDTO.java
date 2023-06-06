@@ -1,4 +1,6 @@
-package com.elves.dscatalog.entities;
+package com.elves.dscatalog.dto;
+
+import com.elves.dscatalog.entities.Product;
 
 public class ProductDTO {
     private Long id;
