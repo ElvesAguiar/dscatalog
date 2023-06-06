@@ -5,10 +5,11 @@ import com.elves.dscatalog.entities.Category;
 import com.elves.dscatalog.repositories.CategoryRepository;
 import com.elves.dscatalog.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 @Service
 public class CategoryService {
@@ -16,8 +17,10 @@ public class CategoryService {
     CategoryRepository repository;
 
     @Transactional(readOnly = true)
-    public List<CategoryDTO> findAll() {
-        return repository.findAll().stream().map(CategoryDTO::new).toList();
+    public Page<CategoryDTO> findAll(Pageable pageable) {
+        Page<Category> page = repository.findAll((pageable));
+
+        return page.map(x -> new CategoryDTO(x));
     }
 
     @Transactional(readOnly = true)
