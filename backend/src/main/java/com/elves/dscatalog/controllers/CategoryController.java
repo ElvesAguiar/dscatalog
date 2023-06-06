@@ -1,5 +1,6 @@
 package com.elves.dscatalog.controllers;
 
+import com.elves.dscatalog.dto.CategoryDTO;
 import com.elves.dscatalog.entities.Category;
 import com.elves.dscatalog.repositories.CategoryRepository;
 import com.elves.dscatalog.services.CategoryService;
@@ -21,8 +22,8 @@ public class CategoryController {
     private CategoryService service;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
-        List<Category> list = service.findAll();
+    public ResponseEntity<List<CategoryDTO>> findAll() {
+        List<CategoryDTO> list = service.findAll();
         return ResponseEntity.ok().body(list);
     }
 
