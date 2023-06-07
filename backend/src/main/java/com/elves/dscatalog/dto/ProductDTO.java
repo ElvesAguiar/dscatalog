@@ -1,6 +1,5 @@
 package com.elves.dscatalog.dto;
 
-import com.elves.dscatalog.entities.Category;
 import com.elves.dscatalog.entities.Product;
 
 import java.time.Instant;
@@ -41,8 +40,6 @@ public class ProductDTO {
         entity.getCategories().forEach(x -> categories.add(new CategoryDTO(x)));
 
     }
-
-
 
     public Long getId() {
         return id;
