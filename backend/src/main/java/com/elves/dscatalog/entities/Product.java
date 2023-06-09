@@ -1,13 +1,18 @@
 package com.elves.dscatalog.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_product")
 public class Product {
     @Id
@@ -28,92 +33,6 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
-    public Product() {
 
-    }
 
-    public Product(Long id, String name, String description, Double price, String imgUrl) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.imgUrl = imgUrl;
-    }
-
-    public Product(Long id, String name, String description, Double price, String imgUrl, Instant date) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.imgUrl = imgUrl;
-        this.date = date;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    public Set<Category> getCategories() {
-        return categories;
-    }
-
-    public void setDate(Instant date) {
-        this.date = date;
-    }
-
-    public void addCategories(Category category){
-        categories.add(category);
-    }
-
-    public Instant getDate() {
-        return date;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Product product)) return false;
-        return Objects.equals(getId(), product.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
 }
