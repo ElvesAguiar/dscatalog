@@ -1,11 +1,17 @@
 package com.elves.dscatalog.dto;
 
 import com.elves.dscatalog.model.Product;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ProductDTO {
     private Long id;
     private String name;
@@ -17,18 +23,6 @@ public class ProductDTO {
 
     private Set<CategoryDTO> categories = new HashSet<>();
 
-    public ProductDTO() {
-
-    }
-
-    public ProductDTO(Long id, String name, String description, Double price, String imgUrl, Instant date) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.imgUrl = imgUrl;
-        this.date=date;
-    }
 
     public ProductDTO(Product entity) {
         id = entity.getId();
@@ -41,31 +35,4 @@ public class ProductDTO {
 
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public Set<CategoryDTO> getCategories() {
-        return categories;
-    }
-
-    public Instant getDate() {
-        return date;
-    }
 }

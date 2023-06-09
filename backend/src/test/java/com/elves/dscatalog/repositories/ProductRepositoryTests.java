@@ -13,6 +13,7 @@ class ProductRepositoryTests {
 
     @Autowired
     private ProductRepository repository;
+
     @Test
     void deleteShouldDeleteObjectWhenIdExists() {
         repository.deleteById(1L);
@@ -21,4 +22,5 @@ class ProductRepositoryTests {
 
         Assertions.assertFalse(result.isPresent());
     }
+
 }
