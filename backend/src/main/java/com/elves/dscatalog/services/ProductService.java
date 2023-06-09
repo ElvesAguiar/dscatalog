@@ -1,9 +1,8 @@
 package com.elves.dscatalog.services;
 
-import com.elves.dscatalog.dto.CategoryDTO;
 import com.elves.dscatalog.dto.ProductDTO;
-import com.elves.dscatalog.entities.Category;
-import com.elves.dscatalog.entities.Product;
+import com.elves.dscatalog.model.Category;
+import com.elves.dscatalog.model.Product;
 import com.elves.dscatalog.repositories.ProductRepository;
 import com.elves.dscatalog.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Set;
 
 
 @Service

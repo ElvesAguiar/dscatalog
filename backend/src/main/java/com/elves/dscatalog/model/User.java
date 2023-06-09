@@ -1,9 +1,8 @@
-package com.elves.dscatalog.entities;
+package com.elves.dscatalog.model;
 
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Collection;
 import java.util.HashSet;

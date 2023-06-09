@@ -1,7 +1,7 @@
 package com.elves.dscatalog.services;
 
 import com.elves.dscatalog.dto.CategoryDTO;
-import com.elves.dscatalog.entities.Category;
+import com.elves.dscatalog.model.Category;
 import com.elves.dscatalog.repositories.CategoryRepository;
 import com.elves.dscatalog.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package com.elves.dscatalog.dto;
 
-import com.elves.dscatalog.entities.Category;
+import com.elves.dscatalog.model.Category;
 
 public class CategoryDTO {
     private Long id;

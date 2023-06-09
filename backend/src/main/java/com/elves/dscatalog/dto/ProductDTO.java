@@ -1,6 +1,6 @@
 package com.elves.dscatalog.dto;
 
-import com.elves.dscatalog.entities.Product;
+import com.elves.dscatalog.model.Product;
 
 import java.time.Instant;
 import java.util.HashSet;

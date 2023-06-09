@@ -1,4 +1,4 @@
-package com.elves.dscatalog.entities;
+package com.elves.dscatalog.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
