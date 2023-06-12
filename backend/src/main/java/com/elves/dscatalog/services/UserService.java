@@ -5,7 +5,7 @@ import com.elves.dscatalog.model.Role;
 import com.elves.dscatalog.model.User;
 import com.elves.dscatalog.projections.UserDetailsProjection;
 import com.elves.dscatalog.repositories.UserRepository;
-import com.elves.dscatalog.exceptions.EntityNotFoundException;
+import com.elves.dscatalog.exceptions.DomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,11 +20,11 @@ public class UserService implements UserDetailsService {
     private UserRepository repository;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws EntityNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws DomainException {
 
         List<UserDetailsProjection> result = repository.searchUserAndRolesByEmail(username);
         if (result.isEmpty()) {
-            throw new EntityNotFoundException("Email not found");
+            throw new DomainException("Email not found");
         }
 
         User user = new User();

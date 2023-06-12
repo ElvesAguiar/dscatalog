@@ -3,7 +3,7 @@ package com.elves.dscatalog.services;
 import com.elves.dscatalog.dto.CategoryDTO;
 import com.elves.dscatalog.model.Category;
 import com.elves.dscatalog.repositories.CategoryRepository;
-import com.elves.dscatalog.exceptions.EntityNotFoundException;
+import com.elves.dscatalog.exceptions.DomainException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,7 +26,7 @@ public class CategoryService {
 
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
-        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException(ENF);
+        if (repository.findById(id).isEmpty()) throw new DomainException(ENF);
 
         return new CategoryDTO(repository.findById(id).get());
     }
@@ -40,7 +40,7 @@ public class CategoryService {
 
     @Transactional
     public void delete(Long id) {
-        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException(ENF);
+        if (repository.findById(id).isEmpty()) throw new DomainException(ENF);
 
         repository.deleteById(id);
 
@@ -49,7 +49,7 @@ public class CategoryService {
     @Transactional
     public CategoryDTO update(Long id, CategoryDTO dto) {
 
-        if (repository.findById(id).isEmpty()) throw new EntityNotFoundException(ENF);
+        if (repository.findById(id).isEmpty()) throw new DomainException(ENF);
 
         Category cat = repository.getReferenceById(id);
 
