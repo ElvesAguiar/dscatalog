@@ -1,6 +1,5 @@
-package com.elves.dscatalog.controllers.exceptions;
+package com.elves.dscatalog.exceptions;
 
-import com.elves.dscatalog.services.exceptions.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

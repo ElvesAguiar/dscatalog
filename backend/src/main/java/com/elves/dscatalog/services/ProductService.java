@@ -4,7 +4,7 @@ import com.elves.dscatalog.dto.ProductDTO;
 import com.elves.dscatalog.model.Category;
 import com.elves.dscatalog.model.Product;
 import com.elves.dscatalog.repositories.ProductRepository;
-import com.elves.dscatalog.services.exceptions.EntityNotFoundException;
+import com.elves.dscatalog.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

@@ -1,4 +1,4 @@
-package com.elves.dscatalog.services.exceptions;
+package com.elves.dscatalog.exceptions;
 
 public class EntityNotFoundException extends RuntimeException{
      public EntityNotFoundException(String msg){

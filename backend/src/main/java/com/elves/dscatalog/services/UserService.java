@@ -5,7 +5,7 @@ import com.elves.dscatalog.model.Role;
 import com.elves.dscatalog.model.User;
 import com.elves.dscatalog.projections.UserDetailsProjection;
 import com.elves.dscatalog.repositories.UserRepository;
-import com.elves.dscatalog.services.exceptions.EntityNotFoundException;
+import com.elves.dscatalog.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
