@@ -1,10 +1,12 @@
 package com.elves.dscatalog.services;
 
 import com.elves.dscatalog.dto.ProductDTO;
+import com.elves.dscatalog.exceptions.DomainException;
 import com.elves.dscatalog.model.Category;
 import com.elves.dscatalog.model.Product;
 import com.elves.dscatalog.repositories.ProductRepository;
-import com.elves.dscatalog.exceptions.DomainException;
+import com.elves.dscatalog.utils.DomainModelMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,27 +19,30 @@ public class ProductService {
     @Autowired
     ProductRepository repository;
 
+    ModelMapper modelMapper = new DomainModelMapper();
+
     public static final String ENF ="Entity not found";
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAll(Pageable pageable) {
         Page<Product> page = repository.findAll((pageable));
 
-        return page.map(ProductDTO::new);
+        return page.map(x ->  modelMapper.map(repository.findById(x.getId()), ProductDTO.class));
     }
 
     @Transactional(readOnly = true)
     public ProductDTO findById(Long id) {
         if (repository.findById(id).isEmpty()) throw new DomainException(ENF);
-
-        return new ProductDTO(repository.findById(id).get());
+        return modelMapper.map(repository.findById(id), ProductDTO.class);
     }
 
     @Transactional
     public ProductDTO insert(ProductDTO dto) {
         Product entity = new Product();
         productToDTO(entity, dto);
-        return new ProductDTO(repository.save(entity));
+        repository.save(entity);
+
+        return modelMapper.map(repository.findById(entity.getId()), ProductDTO.class);
     }
 
     @Transactional
@@ -56,8 +61,8 @@ public class ProductService {
         Product entity = repository.getReferenceById(id);
 
         productToDTO(entity, dto);
-
-        return new ProductDTO(entity);
+        repository.save(entity);
+        return modelMapper.map(repository.findById(entity.getId()), ProductDTO.class);
     }
 
     public void productToDTO(Product entity,ProductDTO dto) {

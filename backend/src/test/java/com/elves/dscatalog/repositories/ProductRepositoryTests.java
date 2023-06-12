@@ -15,7 +15,6 @@ class ProductRepositoryTests {
     private ProductRepository repository;
 
 
-
     @Test
     void deleteShouldDeleteObjectWhenIdExists() {
         repository.deleteById(1L);

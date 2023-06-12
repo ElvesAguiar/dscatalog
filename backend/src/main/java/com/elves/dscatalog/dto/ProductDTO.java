@@ -1,6 +1,5 @@
 package com.elves.dscatalog.dto;
 
-import com.elves.dscatalog.model.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,16 +22,5 @@ public class ProductDTO {
 
     private Set<CategoryDTO> categories = new HashSet<>();
 
-
-    public ProductDTO(Product entity) {
-        id = entity.getId();
-        name = entity.getName();
-        description = entity.getDescription();
-        price = entity.getPrice();
-        imgUrl = entity.getImgUrl();
-        date=entity.getDate();
-        entity.getCategories().forEach(x -> categories.add(new CategoryDTO(x)));
-
-    }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
@@ -21,7 +22,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<Object> handleAllException(DomainException e, HttpServletRequest request) {
+    public ResponseEntity<StandardError> handleAllException(DomainException e, WebRequest request) {
         StandardError error = StandardError.builder().timestamp(Instant.now()).error(e.getMessage())
                 .status(HttpStatus.INTERNAL_SERVER_ERROR.value()).build();
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
