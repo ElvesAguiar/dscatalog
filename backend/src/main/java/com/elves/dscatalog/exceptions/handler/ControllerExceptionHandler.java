@@ -24,7 +24,7 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<StandardError> handleAllException(DomainException e, WebRequest request) {
         StandardError error = StandardError.builder().timestamp(Instant.now()).error(e.getMessage())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value()).build();
+                .status(HttpStatus.INTERNAL_SERVER_ERROR.value()).path(request.getContextPath()).build();
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
