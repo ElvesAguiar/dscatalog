@@ -50,11 +50,11 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public String getFistName() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFistName(String fistName) {
+    public void setFirstName(String fistName) {
         this.firstName = fistName;
     }
 
