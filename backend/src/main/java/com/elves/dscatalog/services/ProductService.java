@@ -4,6 +4,7 @@ import com.elves.dscatalog.dto.ProductDTO;
 import com.elves.dscatalog.exceptions.DomainException;
 import com.elves.dscatalog.model.Category;
 import com.elves.dscatalog.model.Product;
+import com.elves.dscatalog.projections.ProductProjection;
 import com.elves.dscatalog.repositories.ProductRepository;
 import com.elves.dscatalog.utils.DomainModelMapper;
 import org.modelmapper.ModelMapper;
@@ -12,6 +13,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 @Service
@@ -80,4 +84,14 @@ public class ProductService {
         });
     }
 
+    @Transactional(readOnly = true)
+    public Page<ProductProjection> fibdAllPaged(String name,String categoryId,Pageable pageable) {
+
+       String[] vet = categoryId.split(",");
+        List<String> list =Arrays.asList(vet);
+        List<Long> categoryIds = !"0".equals(categoryId)
+                ? list.stream().map(Long::parseLong).toList() : Arrays.asList();
+
+        return repository.searchProducts(categoryIds,name, pageable);
+    }
 }
