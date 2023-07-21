@@ -1,8 +1,10 @@
 package com.elves.dscatalog.exceptions.handler;
 
 import com.elves.dscatalog.exceptions.DomainException;
+import com.elves.dscatalog.exceptions.EmailException;
 import com.elves.dscatalog.exceptions.StandardError;
 import com.elves.dscatalog.exceptions.ValidationError;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,20 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(DomainException.class)
     public ResponseEntity<StandardError> resourceNotFound(DomainException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    public ResponseEntity<StandardError> resourceNotFound(EntityNotFoundException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(EmailException.class)
+    public ResponseEntity<StandardError> resourceNotFound(EmailException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.BAD_REQUEST;
         StandardError err = new StandardError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
