@@ -1,9 +1,6 @@
 package com.elves.dscatalog.controllers;
 
-import com.elves.dscatalog.dto.EmailDTO;
-import com.elves.dscatalog.dto.UserDTO;
-import com.elves.dscatalog.dto.UserInsertDTO;
-import com.elves.dscatalog.dto.UserUpdateDTO;
+import com.elves.dscatalog.dto.*;
 import com.elves.dscatalog.services.AuthService;
 import com.elves.dscatalog.services.UserService;
 import jakarta.validation.Valid;
@@ -27,9 +24,18 @@ public class AuthController {
     @PostMapping(value = "/recover-token")
     public ResponseEntity<Void> createRecoverToken(@Valid @RequestBody EmailDTO body) {
 
-       authService.createRecoverToken(body);
+        authService.createRecoverToken(body);
 
         return ResponseEntity.noContent().build();
     }
 
-} 
+    @PutMapping(value = "/new-password")
+    public ResponseEntity<Void> createRecoverToken(@Valid @RequestBody NewPasswordDTO body) {
+
+        authService.saveNewPassword(body);
+
+        return ResponseEntity.noContent().build();
+
+
+    }
+}
