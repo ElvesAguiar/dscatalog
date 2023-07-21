@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.util.List;
@@ -37,6 +38,7 @@ public class AuthService {
     @Autowired
     private EmailService emailService;
 
+    @Transactional
     public void createRecoverToken(EmailDTO body) {
 
         User user = userRepository.findByEmail(body.getEmail());
@@ -58,6 +60,7 @@ public class AuthService {
         emailService.sendEmail(body.getEmail(), "recuperação de senha", text);
     }
 
+    @Transactional
     public void saveNewPassword(NewPasswordDTO body) {
         List<PasswordRecover> result = passwordRecoverRepository.searchValidTokens(body.getToken(), Instant.now());
         if (result.isEmpty()) throw new EntityNotFoundException("token invalido");
@@ -65,4 +68,6 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(body.getPassword()));
         user = userRepository.save(user);
     }
+
+
 }
