@@ -1,7 +1,6 @@
 package com.elves.dscatalog.controllers;
 
 import com.elves.dscatalog.dto.ProductDTO;
-import com.elves.dscatalog.projections.ProductProjection;
 import com.elves.dscatalog.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,12 +20,12 @@ public class ProductController {
     private ProductService service;
 
     @GetMapping
-    public ResponseEntity<Page<ProductProjection>> findAll(
+    public ResponseEntity<Page<ProductDTO>> findAll(
             @RequestParam(value = "name", defaultValue = "") String name,
             @RequestParam(value = "categoryId", defaultValue = "0") String categoryId,
 
             Pageable pageable) {
-        Page<ProductProjection> page = service.fibdAllPaged(name,categoryId,pageable);
+        Page<ProductDTO> page = service.fibdAllPaged(name,categoryId,pageable);
         return ResponseEntity.ok().body(page);
     }
 

@@ -25,13 +25,13 @@ public class ProductService {
 
     ModelMapper modelMapper = new DomainModelMapper();
 
-    public static final String ENF ="Entity not found";
+    public static final String ENF = "Entity not found";
 
     @Transactional(readOnly = true)
     public Page<ProductDTO> findAll(Pageable pageable) {
         Page<Product> page = repository.findAll((pageable));
 
-        return page.map(x ->  modelMapper.map(repository.findById(x.getId()), ProductDTO.class));
+        return page.map(x -> modelMapper.map(repository.findById(x.getId()), ProductDTO.class));
     }
 
     @Transactional(readOnly = true)
@@ -69,7 +69,7 @@ public class ProductService {
         return modelMapper.map(repository.findById(entity.getId()), ProductDTO.class);
     }
 
-    public void productToDTO(Product entity,ProductDTO dto) {
+    public void productToDTO(Product entity, ProductDTO dto) {
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
@@ -85,13 +85,20 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductProjection> fibdAllPaged(String name,String categoryId,Pageable pageable) {
+    public Page<ProductDTO> fibdAllPaged(String name, String categoryId, Pageable pageable) {
 
-       String[] vet = categoryId.split(",");
-        List<String> list =Arrays.asList(vet);
+        String[] vet = categoryId.split(",");
+        List<String> list = Arrays.asList(vet);
         List<Long> categoryIds = !"0".equals(categoryId)
                 ? list.stream().map(Long::parseLong).toList() : Arrays.asList();
 
-        return repository.searchProducts(categoryIds,name, pageable);
+
+        Page<ProductProjection> page = repository.searchProducts(categoryIds, name, pageable);
+
+        List<Long> productIds = page.map(x -> x.getId()).toList();
+
+        List<Product> result =  repository.searchProductsWithCategories(productIds);
+        return page.map(x -> modelMapper.map(repository.findById(x.getId()), ProductDTO.class));
+
     }
 }
