@@ -38,7 +38,7 @@ cd backend
 # Para fazer requisições
 Pré-requisitos: Postman
 -Inicie uma coleção-> Na barra com "GET" faça um requisição get (exemplo - http://localhost:8080/products)
-```
+
 
 
 # Autor
